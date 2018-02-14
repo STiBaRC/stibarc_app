@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="gq.stibarc.mobile" version="1.1.8" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>STiBaRC</name>
+    <description>
+        The official STiBaRC mobile app.
+    </description>
+    <icon src="icon.jpg" />
+    <author email="herronjo110@gmail.com" href="https://stibarc.gq">
+        STiBaRC Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+	<allow-navigation href="http://*/*" />
+	<allow-intent href="https://*/*" />
+	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
+</widget>

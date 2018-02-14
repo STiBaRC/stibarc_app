@@ -1,0 +1,38 @@
+﻿#poststuff {
+    background-color: #FFFFFF;
+    word-wrap: break-word;
+}
+
+#comment {
+    background-color: #98DFF3;
+    word-wrap: break-word;
+}
+
+body {
+    touch-action: manipulation;
+    background-color: #98DFF3;
+    word-wrap: break-word;
+    overflow-y: scroll;
+}
+
+footer {
+    background-color: #49B9CA;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+a:link {
+    color: #000000;
+}
+
+a:visited {
+    color: #000000;
+}
+
+a:hover {
+    color: #000000;
+}
+
+a:active {
+    color: #000000;
+}
