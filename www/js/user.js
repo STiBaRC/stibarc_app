@@ -66,7 +66,11 @@ var getStuff = function (id) {
 	var birthday = tmp[3].split(":")[1];
 	document.getElementById("username").innerHTML = "Username: ".concat(id);
 	document.getElementById("name").innerHTML = "Real name: ".concat(name);
-	document.getElementById("email").innerHTML = "Email: ".concat(email);
+	if (email != "Not shown") {
+		document.getElementById("email").innerHTML = "Email: ".concat("<a href=\"mailto:" + email + "\">" + email + "</a>");
+	} else {
+		document.getElementById("email").innerHTML = "Email: ".concat(email);
+	}
 	document.getElementById("bday").innerHTML = "Birthday: ".concat(birthday);
 	posts = posts.split(",");
 	document.getElementById("posts").innerHTML = "";
