@@ -60,11 +60,13 @@ var getStuff = function (id) {
 	thing.send(null);
     var stuff = thing.responseText;
 	var tmp = stuff.split("\n");
+	var rank = tmp[4].split(":")[1];
 	var name = tmp[0].split(":")[1];
 	var email = tmp[1].split(":")[1];
 	var posts = tmp[2].split(":")[1];
 	var birthday = tmp[3].split(":")[1];
 	document.getElementById("username").innerHTML = "Username: ".concat(id);
+	document.getElementById("rank").innerHTML = "Rank: ".concat(rank);
 	document.getElementById("name").innerHTML = "Real name: ".concat(name);
 	if (email != "Not shown") {
 		document.getElementById("email").innerHTML = "Email: ".concat("<a href=\"mailto:" + email + "\">" + email + "</a>");
