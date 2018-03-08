@@ -1,4 +1,4 @@
-﻿var login = function () {
+var login = function () {
     document.getElementById("blank").style.display = "none";
     document.getElementById("badnamepass").style.display = "none";
     var username = document.getElementById("username").value;
