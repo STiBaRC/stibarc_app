@@ -63,10 +63,18 @@ var checkId = function () {
 	}
 }
 
+var getUsername = function() {
+	var sess = window.localStorage.getItem("sess");
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("POST", "https://api.stibarc.gq/getusername.sjs", false);
+	xmlHttp.send("sess="+sess);
+	window.localStorage.setItem("username", xmlHttp.responseText.split("\n")[0]);
+}
+
 window.onload = function () {
     var offline = false;
     //var cookie = toJSON(document.cookie);
-	var sess = window.localStorage.getItem("sess");
+    var sess = window.localStorage.getItem("sess");
     if (sess != undefined && sess != null && sess != "") {
         document.getElementById("loggedout").style.display = "none";
         document.getElementById("loggedin").style.display = "";
@@ -81,7 +89,12 @@ window.onload = function () {
         offline = true;
     }
     if (!offline) {
-		checkId();
+	if (window.localStorage.getItem("username") == "" || window.localStorage.getItem("username") == undefined) {
+		if (sess != undefined && sess != null && sess != "") {
+			getUsername();
+		}
+	}
+	checkId();
         var tmp = xmlHttp.responseText.split("\n");
         document.getElementById("shitlist").innerHTML = "";
         for (i = 0; i < tmp.length - 1; i++) {
