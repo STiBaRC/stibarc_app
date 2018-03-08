@@ -1,4 +1,4 @@
-﻿var pushed = false;
+var pushed = false;
 function getAllUrlParams(url) {
     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
     var obj = {};
@@ -54,6 +54,16 @@ var toJSON = function (cookie) {
     return output;
 }
 
+var getRank = function() {
+	var thing = new XMLHttpRequest();
+	thing.open("GET", "https://api.stibarc.gq/getuser.sjs?id=" + window.localStorage.getItem("username"), false);
+	thing.send(null);
+	var stuff = thing.responseText;
+	var tmp = stuff.split("\n");
+	var rank = tmp[4].split(":")[1];
+	return rank;
+}
+
 var postcomment = function (id) {
 	var again = window.localStorage.getItem("cancommentagain");
 	if (again == null || again == "" || again == undefined) again = 0;
@@ -82,7 +92,6 @@ var postcomment = function (id) {
 
 window.onload = function () {
 	pushed = false;
-    //var cookie = toJSON(document.cookie);
     var sess = window.localStorage.getItem("sess");
 	if (sess != undefined && sess != "" && sess != null) {
         document.getElementById("postout").style.display = "none";
@@ -95,16 +104,22 @@ window.onload = function () {
     xmlHttp.open("GET", "https://api.stibarc.gq/getpost.sjs?id="+id, false);
     xmlHttp.send(null);
     var stuff = JSON.parse(xmlHttp.responseText);
-    document.getElementById("title").innerHTML = stuff.title.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    document.getElementById("title").innerHTML = stuff.title.replace(/</g, "<").replace(/>/g, ">");
     document.title = stuff.title + " - STiBaRC";
     document.getElementById("dateandstuff").innerHTML = 'Posted by <a href="user.html?id=' + stuff.poster + '">' + stuff.poster + "</a> at " + stuff.postdate;
-    document.getElementById("content").innerHTML = stuff.content.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\r\n/g, "<br/>");
+    document.getElementById("content").innerHTML = stuff.content.replace(/</g, "<").replace(/>/g, ">").replace(/\r\n/g, "<br/>");
+    if (stuff['edited'] == true) {
+        document.getElementById("edited").style.display = "";
+    }
+    if (stuff.poster == window.localStorage.getItem("username") && getRank() != "User") {
+        document.getElementById("editlink").style.display = "";
+    }
     xmlHttp.open("GET", "https://api.stibarc.gq/getcomments.sjs?id=" + id, false);
     xmlHttp.send(null);
     if (xmlHttp.responseText != "undefined\n") {
         var comments = JSON.parse(xmlHttp.responseText);
         for (var key in comments) {
-            document.getElementById("comments").innerHTML = document.getElementById("comments").innerHTML + '<div id="comment"><a href="user.html?id=' + comments[key]['poster'] + '">' + comments[key]['poster'] + '</a><br/>' + comments[key]['content'].replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\r\n/g, "<br/>") + '</div><br/>';
+            document.getElementById("comments").innerHTML = document.getElementById("comments").innerHTML + '<div id="comment"><a href="user.html?id=' + comments[key]['poster'] + '">' + comments[key]['poster'] + '</a><br/>' + comments[key]['content'].replace(/</g, "<").replace(/>/g, ">").replace(/\r\n/g, "<br/>") + '</div><br/>';
         }
     } else {
         document.getElementById("comments").innerHTML = document.getElementById("comments").innerHTML + '<div id="comment">No comments</div>';
@@ -113,5 +128,8 @@ window.onload = function () {
 		if (!pushed) {
 			postcomment(id);
 		}
+    }
+    document.getElementById("editlink").onclick = function (evt) {
+	document.location.href = "editpost.html?id=" + id;
     }
 }
