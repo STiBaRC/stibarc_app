@@ -68,7 +68,7 @@ var getStuff = function (id) {
 	document.getElementById("username").innerHTML = "Username: ".concat(id);
 	document.getElementById("rank").innerHTML = "Rank: ".concat(rank);
 	document.getElementById("name").innerHTML = "Real name: ".concat(name);
-	if (email != "Not shown") {
+	if (email != "Not shown" && email != "Not set") {
 		document.getElementById("email").innerHTML = "Email: ".concat("<a href=\"mailto:" + email + "\">" + email + "</a>");
 	} else {
 		document.getElementById("email").innerHTML = "Email: ".concat(email);
