@@ -1,4 +1,4 @@
-﻿function getAllUrlParams(url) {
+function getAllUrlParams(url) {
     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
     var obj = {};
     if (queryString) {
@@ -53,7 +53,8 @@ var toJSON = function(cookie) {
     return output;
 }
 
-var checkId = function () {
+//Unused
+/*var checkId = function () {
 	var id = window.localStorage.getItem("appID");
 	if (id == null || id == "" || id == undefined) {
 		var xmlHttp = new XMLHttpRequest();
@@ -61,7 +62,7 @@ var checkId = function () {
 		xmlHttp.send(null);
 		window.localStorage.setItem("appID", xmlHttp.responseText);
 	}
-}
+}*/
 
 var getUsername = function() {
 	var sess = window.localStorage.getItem("sess");
@@ -96,7 +97,7 @@ window.onload = function () {
 			getUsername();
 		}
 	}
-	checkId();
+	//checkId();
         var tmp = xmlHttp.responseText.split("\n");
         document.getElementById("shitlist").innerHTML = "";
         for (i = 0; i < tmp.length - 1; i++) {
