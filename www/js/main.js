@@ -86,6 +86,8 @@ window.onload = function () {
     try {
         xmlHttp.send(null);
     } catch (err) {
+	document.getElementById("error").innerHTML = err;
+	document.getElementById("error").style.display = "";
         offline = true;
     }
     if (!offline) {
