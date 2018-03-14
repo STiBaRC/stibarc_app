@@ -1,3 +1,9 @@
+var senderr = function(err) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("post", "https://api.stibarc.gq/senderror.sjs");
+  xmlHttp.send("error="+err);
+}
+
 function getAllUrlParams(url) {
     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
     var obj = {};
@@ -73,6 +79,7 @@ var getUsername = function() {
 }
 
 window.onload = function () {
+    try {
     var offline = false;
     //var cookie = toJSON(document.cookie);
     var sess = window.localStorage.getItem("sess");
@@ -105,5 +112,8 @@ window.onload = function () {
         }
     } else {
         document.getElementById("shitlist").innerHTML = "Error loading posts. Device offline.";
+    }
+    } catch(err) {
+	senderr(err);    
     }
 }
