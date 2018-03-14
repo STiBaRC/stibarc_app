@@ -1,4 +1,11 @@
+var senderr = function(err) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("post", "https://api.stibarc.gq/senderror.sjs");
+  xmlHttp.send("error="+err);
+}
+
 var login = function () {
+    try {
     document.getElementById("blank").style.display = "none";
     document.getElementById("badnamepass").style.display = "none";
     var username = document.getElementById("username").value;
@@ -20,6 +27,9 @@ var login = function () {
         }
     } else {
         document.getElementById("blank").style.display = "";
+    }
+    } catch(err) {
+	 senderr(err);   
     }
 }
 
