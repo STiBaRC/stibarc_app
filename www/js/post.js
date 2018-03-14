@@ -1,3 +1,9 @@
+var senderr = function(err) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("post", "https://api.stibarc.gq/senderror.sjs");
+  xmlHttp.send("error="+err);
+}
+
 var pushed = false;
 function getAllUrlParams(url) {
     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
@@ -65,6 +71,7 @@ var getRank = function() {
 }
 
 var postcomment = function (id) {
+	try {
 	var again = window.localStorage.getItem("cancommentagain");
 	if (again == null || again == "" || again == undefined) again = 0;
 	var content = document.getElementById("comtent").value;
@@ -88,12 +95,16 @@ var postcomment = function (id) {
 			document.getElementById("wait").style.display = "";
 		}
 	}
+	} catch(err) {
+		senderr(err);
+	}
 }
 
 window.onload = function () {
-	pushed = false;
+    try {
+    pushed = false;
     var sess = window.localStorage.getItem("sess");
-	if (sess != undefined && sess != "" && sess != null) {
+    if (sess != undefined && sess != "" && sess != null) {
         document.getElementById("postout").style.display = "none";
         document.getElementById("postin").style.display = "";
         document.getElementById("footerout").style.display = "none";
@@ -131,5 +142,8 @@ window.onload = function () {
     }
     document.getElementById("editlink").onclick = function (evt) {
 	document.location.href = "editpost.html?id=" + id;
+    }
+    } catch(err) {
+	senderr(err);
     }
 }
