@@ -1,4 +1,10 @@
-﻿function getAllUrlParams(url) {
+var senderr = function(err) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("post", "https://api.stibarc.gq/senderror.sjs");
+  xmlHttp.send("error="+err);
+}
+
+function getAllUrlParams(url) {
     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
     var obj = {};
     if (queryString) {
@@ -55,6 +61,7 @@ var toLink = function (item) {
 }
 
 var getStuff = function (id) {
+    try {
 	var thing = new XMLHttpRequest();
 	thing.open("GET", "https://api.stibarc.gq/getuser.sjs?id=" + id, false);
 	thing.send(null);
@@ -79,9 +86,13 @@ var getStuff = function (id) {
 	for (i = 0; i < posts.length; i++) {
         toLink(posts[i]);
     }
+    } catch(err) {
+	senderr(err);
+    }
 }
 
 window.onload = function () {
+	try {
 	var id = getAllUrlParams().id;
 	//var cookie = toJSON(document.cookie);
 	var sess = window.localStorage.getItem("sess");
@@ -90,4 +101,7 @@ window.onload = function () {
         document.getElementById("footerout").style.display = "none";
         document.getElementById("footerin").style.display = "";
     }
+	} catch(err) {
+		senderr(err);
+	}
 }
