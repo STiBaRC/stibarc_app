@@ -1,3 +1,9 @@
+var senderr = function(err) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("post", "https://api.stibarc.gq/senderror.sjs");
+  xmlHttp.send("error="+err);
+}
+
 function getAllUrlParams(url) {
     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
     var obj = {};
@@ -43,6 +49,7 @@ var toJSON = function (cookie) {
 }
 
 var register = function () {
+	try {
 	var name = document.getElementById("name").value;
 	var showname = document.getElementById("showname").value;
 	var username = document.getElementById("username").value;
@@ -68,10 +75,13 @@ var register = function () {
 	} else {
 		document.getElementById("blank").style.display = "";
 	}
+	} catch(err) {
+		senderr(err);
+	}
 }
 
 window.onload = function () {
-	document.getElementById("send").onclick = function (evt) {
+    document.getElementById("send").onclick = function (evt) {
         register();
     }
 }
