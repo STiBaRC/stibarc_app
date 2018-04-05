@@ -13,6 +13,7 @@
 	<allow-navigation href="http://*/*" />
 	<allow-intent href="https://*/*" />
 	<allow-intent href="mailto:*" />
+	<preference name="StatusBarBackgroundColor" value="#75d5f0" />
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 	<gap:plugin name="phonegap-plugin-push" source="npm" />
 </widget>
