@@ -1,12 +1,35 @@
 body {
-	text-align: center;
-	background-color: #98DFF3;
+    overflow-y: scroll;
+    background-color: #98DFF3;
+    word-wrap: break-word;
 }
 #main {
-	background-color: #FFFFFF;
+    text-align: center;
+    background-color: #FFFFFF;
+    word-wrap: break-word;
+}
+#main2 {
+    text-align: left;
+    background-color: #FFFFFF;
+    word-wrap: break-word;
+}
+ul {
+    text-align: left;
 }
 footer {
-	background-color: #49B9CA;
-	text-align: center;
-	word-wrap: break-word;
+    background-color: #49B9CA;
+    text-align: center;
+    word-wrap: break-word;
+}
+a:link {
+    color: #000000;
+}
+a:visited {
+    color: #000000;
+}
+a:hover {
+    color: #000000;
+}
+a:active {
+    color: #000000;
 }
