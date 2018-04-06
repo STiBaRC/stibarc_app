@@ -15,7 +15,7 @@ var checkNotifs = function() {
         cordova.plugins.notification.local.schedule({
             title: "New post",
             message: text,
-            icon: "file://icon.png"
+            icon: "https://stibarc.gq/icon.png"
         });
 		cordova.plugins.notification.local.on("click", function (notification) {
 			var postID = tmp[tmp.length-2];
