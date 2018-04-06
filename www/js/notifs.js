@@ -45,5 +45,5 @@ var checkNotifs = function() {
 
 var startNotifs = function() {
 	//setupNotifs();
-	setInterval(checkNotifs(), 500);
+	setInterval(checkNotifs, 500);
 }
