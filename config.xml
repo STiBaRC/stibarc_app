@@ -13,7 +13,7 @@
 	<allow-navigation href="http://*/*" />
 	<allow-intent href="https://*/*" />
 	<allow-intent href="mailto:*" />
-	<preference name="StatusBarBackgroundColor" value="#75d5f0" />
+	<preference name="StatusBarBackgroundColor" value="#49B9CA" />
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
 	<plugin name="de.appplant.cordova.plugin.local-notification" source="npm" />
