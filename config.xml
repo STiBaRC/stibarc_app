@@ -16,6 +16,6 @@
 	<preference name="StatusBarBackgroundColor" value="#75d5f0" />
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
-	<gap:plugin name="cordova-plugin-local-notifications">
+	<gap:plugin name="cordova-plugin-local-notifications" />
 	<gap:plugin name="phonegap-plugin-push" source="npm" />
 </widget>
