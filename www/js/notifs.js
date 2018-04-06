@@ -5,7 +5,7 @@ var checkNotifs = function() {
 	var tmp = xmlHttp.responseText.split("\n");
 	var lastID = window.localStorage.getItem("lastNotifID");
 	if (lastID == "" || lastID == undefined || lastID == null) {lastID = -1;}
-	if (tmp[0] > lastID) {
+	if (tmp[0] != lastID) {
 		var text = "";
 		for (var i = 1; i < tmp.length-3; i++) {
 			text = text.concat(tmp[i]+"\n");
