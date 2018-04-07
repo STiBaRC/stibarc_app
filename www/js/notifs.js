@@ -43,7 +43,7 @@ var checkNotifsUser = function(user) {
 				window.localStorage.setItem("lastUserNotifID", tmp[0].concat(tmp[tmp.length-2]));
 				cordova.plugins.notification.local.schedule({
 					title: tmp[1],
-					message: text,
+					message: tmp[2],
 					icon: "file://android_asset/icon.png"
 				});
 				cordova.plugins.notification.local.on("click", function (notification) {
@@ -76,7 +76,7 @@ var checkNotifsUser = function(user) {
 
 var doCheck = function() {
 	checkNotifs();
-	if (window.localStorage.getItem("username") != null || window.localStorage.getItem("username") != undefined || window.localStorage.getItem("username") != "") {
+	if (window.localStorage.getItem("username") != null && window.localStorage.getItem("username") != undefined && window.localStorage.getItem("username") != "") {
 		checkNotifsUser(window.localStorage.getItem("username"));
 	}
 }
