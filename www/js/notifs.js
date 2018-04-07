@@ -6,16 +6,16 @@ var checkNotifs = function() {
 	var lastID = window.localStorage.getItem("lastNotifID");
 	if (lastID == "" || lastID == undefined || lastID == null) {lastID = -1;}
 	if (tmp[0] != lastID) {
-		/*var text = "";
+		var text = "";
 		for (var i = 1; i < tmp.length-3; i++) {
 			text = text.concat(tmp[i]+"\n");
 		}
-		text = text.concat(tmp[tmp.length-3]);*/
+		text = text.concat(tmp[tmp.length-3]);
 		window.localStorage.setItem("lastNotifID", tmp[0]);
         	cordova.plugins.notification.local.schedule({
             		title: "New post",
             		message: tmp[1],
-            		icon: "file://android_asset/icon.png"
+            		icon: "file://android_asset/www/icon.png"
         	});
 		cordova.plugins.notification.local.on("click", function (notification) {
 			var postID = tmp[tmp.length-2];
@@ -25,32 +25,29 @@ var checkNotifs = function() {
 }
 
 var checkNotifsUser = function(user) {
-	var perms = window.localStorage.getItem("notifs");
-	if (perms == "granted") {
-		var xmlHttp = new XMLHttpRequest();
-		xmlHttp.open("post", "https://api.stibarc.gq/getusernotifs.sjs", false);
-		xmlHttp.send("id="+user);
-		if (xmlHttp.responseText.split("\n")[0] != "None") {
-			var tmp = xmlHttp.responseText.split("\n");
-			var lastID = window.localStorage.getItem("lastUserNotifID");
-			if (lastID == "" || lastID == undefined || lastID == null) {lastID = -1;}
-			if (tmp[0].concat(tmp[tmp.length-2]) != lastID) {
-				/*var text = "";
-				for (var i = 2; i < tmp.length-3; i++) {
-					text = text.concat(tmp[i]+"\n");
-				}
-				text = text.concat(tmp[tmp.length-3]);*/
-				window.localStorage.setItem("lastUserNotifID", tmp[0].concat(tmp[tmp.length-2]));
-				cordova.plugins.notification.local.schedule({
-					title: tmp[1],
-					message: tmp[2],
-					icon: "file://android_asset/icon.png"
-				});
-				cordova.plugins.notification.local.on("click", function (notification) {
-					var postID = tmp[tmp.length-2];
-					window.location.assign("post.html?id="+postID);
-				});
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("post", "https://api.stibarc.gq/getusernotifs.sjs", false);
+	xmlHttp.send("id="+user);
+	if (xmlHttp.responseText.split("\n")[0] != "None") {
+		var tmp = xmlHttp.responseText.split("\n");
+		var lastID = window.localStorage.getItem("lastUserNotifID");
+		if (lastID == "" || lastID == undefined || lastID == null) {lastID = -1;}
+		if (tmp[0].concat(tmp[tmp.length-2]) != lastID) {
+			var text = "";
+			for (var i = 2; i < tmp.length-3; i++) {
+				text = text.concat(tmp[i]+"\n");
 			}
+			text = text.concat(tmp[tmp.length-3]);
+			window.localStorage.setItem("lastUserNotifID", tmp[0].concat(tmp[tmp.length-2]));
+			cordova.plugins.notification.local.schedule({
+				title: tmp[1],
+				message: tmp[2],
+				icon: "file://android_asset/www/icon.png"
+			});
+			cordova.plugins.notification.local.on("click", function (notification) {
+				var postID = tmp[tmp.length-2];
+				window.location.assign("post.html?id="+postID);
+			});
 		}
 	}
 }
