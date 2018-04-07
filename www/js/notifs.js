@@ -30,25 +30,27 @@ var checkNotifsUser = function(user) {
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open("post", "https://api.stibarc.gq/getusernotifs.sjs", false);
 		xmlHttp.send("id="+user);
-		var tmp = xmlHttp.responseText.split("\n");
-		var lastID = window.localStorage.getItem("lastUserNotifID");
-		if (lastID == "" || lastID == undefined || lastID == null) {lastID = -1;}
-		if (tmp[0].concat(tmp[tmp.length-2]) != lastID) {
-			var text = "";
-			for (var i = 2; i < tmp.length-3; i++) {
-				text = text.concat(tmp[i]+"\n");
+		if (xmlHttp.responseText.split("\n")[0] != "None") {
+			var tmp = xmlHttp.responseText.split("\n");
+			var lastID = window.localStorage.getItem("lastUserNotifID");
+			if (lastID == "" || lastID == undefined || lastID == null) {lastID = -1;}
+			if (tmp[0].concat(tmp[tmp.length-2]) != lastID) {
+				var text = "";
+				for (var i = 2; i < tmp.length-3; i++) {
+					text = text.concat(tmp[i]+"\n");
+				}
+				text = text.concat(tmp[tmp.length-3]);
+				window.localStorage.setItem("lastUserNotifID", tmp[0].concat(tmp[tmp.length-2]));
+				cordova.plugins.notification.local.schedule({
+					title: tmp[1],
+					message: text,
+					icon: "file://android_asset/icon.png"
+				});
+				cordova.plugins.notification.local.on("click", function (notification) {
+					var postID = tmp[tmp.length-2];
+					window.location.assign("post.html?id="+postID);
+				});
 			}
-			text = text.concat(tmp[tmp.length-3]);
-			window.localStorage.setItem("lastUserNotifID", tmp[0].concat(tmp[tmp.length-2]));
-			cordova.plugins.notification.local.schedule({
-				title: tmp[1],
-				message: text,
-				icon: "file://android_asset/icon.png"
-			});
-			cordova.plugins.notification.local.on("click", function (notification) {
-				var postID = tmp[tmp.length-2];
-				window.location.assign("post.html?id="+postID);
-			});
 		}
 	}
 }
