@@ -115,10 +115,10 @@ window.onload = function () {
     xmlHttp.open("GET", "https://api.stibarc.gq/getpost.sjs?id="+id, false);
     xmlHttp.send(null);
     var stuff = JSON.parse(xmlHttp.responseText);
-    document.getElementById("title").innerHTML = stuff.title.replace(/</g, "<").replace(/>/g, ">");
+    document.getElementById("title").innerHTML = stuff.title.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     document.title = stuff.title + " - STiBaRC";
     document.getElementById("dateandstuff").innerHTML = 'Posted by <a href="user.html?id=' + stuff.poster + '">' + stuff.poster + "</a> at " + stuff.postdate;
-    document.getElementById("content").innerHTML = stuff.content.replace(/</g, "<").replace(/>/g, ">").replace(/\r\n/g, "<br/>");
+    document.getElementById("content").innerHTML = stuff.content.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\r\n/g, "<br/>");
     if (stuff['edited'] == true) {
         document.getElementById("edited").style.display = "";
     }
@@ -130,7 +130,7 @@ window.onload = function () {
     if (xmlHttp.responseText != "undefined\n") {
         var comments = JSON.parse(xmlHttp.responseText);
         for (var key in comments) {
-            document.getElementById("comments").innerHTML = document.getElementById("comments").innerHTML + '<div id="comment"><a href="user.html?id=' + comments[key]['poster'] + '">' + comments[key]['poster'] + '</a><br/>' + comments[key]['content'].replace(/</g, "<").replace(/>/g, ">").replace(/\r\n/g, "<br/>") + '</div><br/>';
+            document.getElementById("comments").innerHTML = document.getElementById("comments").innerHTML + '<div id="comment"><a href="user.html?id=' + comments[key]['poster'] + '">' + comments[key]['poster'] + '</a><br/>' + comments[key]['content'].replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\r\n/g, "<br/>") + '</div><br/>';
         }
     } else {
         document.getElementById("comments").innerHTML = document.getElementById("comments").innerHTML + '<div id="comment">No comments</div>';
