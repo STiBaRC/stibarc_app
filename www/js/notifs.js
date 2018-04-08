@@ -15,11 +15,11 @@ var checkNotifs = function() {
         	cordova.plugins.notification.local.schedule({
             		title: "New post",
             		message: tmp[1],
-            		icon: "icon.png"
+            		icon: "icon.png",
+			data: {postid:tmp[tmp.length-2]}
         	});
 		cordova.plugins.notification.local.on("click", function (notification) {
-			var postID = tmp[tmp.length-2];
-			window.location.assign("post.html?id="+postID);
+			window.location.assign("post.html?id="+notification.data.postid);
 		});
 	}
 }
@@ -42,11 +42,11 @@ var checkNotifsUser = function(user) {
 			cordova.plugins.notification.local.schedule({
 				title: tmp[1],
 				message: tmp[2],
-				icon: "icon.png"
+				icon: "icon.png",
+				data: {postid:tmp[tmp.length-2]}
 			});
 			cordova.plugins.notification.local.on("click", function (notification) {
-				var postID = tmp[tmp.length-2];
-				window.location.assign("post.html?id="+postID);
+				window.location.assign("post.html?id="+notification.data.postid);
 			});
 		}
 	}
