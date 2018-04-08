@@ -16,7 +16,7 @@ var checkNotifs = function() {
             		title: "New post",
             		message: tmp[1],
             		icon: "icon.png",
-			data: {postid:tmp[tmp.length-2]}
+			postid: tmp[tmp.length-2]
         	});
 		cordova.plugins.notification.local.on("click", function (notification) {
 			window.location.assign("post.html?id="+notification.data.postid);
@@ -43,10 +43,10 @@ var checkNotifsUser = function(user) {
 				title: tmp[1],
 				message: tmp[2],
 				icon: "icon.png",
-				data: {postid:tmp[tmp.length-2]}
+				postid: tmp[tmp.length-2]
 			});
 			cordova.plugins.notification.local.on("click", function (notification) {
-				window.location.assign("post.html?id="+notification.data.postid);
+				window.location.assign("post.html?id="+notification.postid);
 			});
 		}
 	}
