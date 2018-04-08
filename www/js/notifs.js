@@ -15,7 +15,7 @@ var checkNotifs = function() {
         	cordova.plugins.notification.local.schedule({
             		title: "New post",
             		message: tmp[1],
-            		icon: "file://android_asset/www/icon.png"
+            		icon: "icon.png"
         	});
 		cordova.plugins.notification.local.on("click", function (notification) {
 			var postID = tmp[tmp.length-2];
@@ -42,7 +42,7 @@ var checkNotifsUser = function(user) {
 			cordova.plugins.notification.local.schedule({
 				title: tmp[1],
 				message: tmp[2],
-				icon: "file://android_asset/www/icon.png"
+				icon: "icon.png"
 			});
 			cordova.plugins.notification.local.on("click", function (notification) {
 				var postID = tmp[tmp.length-2];
