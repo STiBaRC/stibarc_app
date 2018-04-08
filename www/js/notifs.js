@@ -19,7 +19,7 @@ var checkNotifs = function() {
 			postid: tmp[tmp.length-2]
         	});
 		cordova.plugins.notification.local.on("click", function (notification) {
-			window.location.assign("post.html?id="+notification.data.postid);
+			window.location.assign("post.html?id="+notification.postid);
 		});
 	}
 }
