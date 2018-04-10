@@ -110,7 +110,6 @@ window.onload = function () {
         for (i = 0; i < tmp.length - 1; i++) {
             toLink(tmp[i]);
         }
-	startNotifs();
     } else {
         document.getElementById("shitlist").innerHTML = "Error loading posts. Device offline.";
     }
@@ -119,4 +118,5 @@ window.onload = function () {
     }
     cordova.plugins.backgroundMode.enable();
     cordova.plugins.backgroundMode.overrideBackButton();
+    startNotifs();
 }
