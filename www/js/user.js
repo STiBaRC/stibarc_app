@@ -49,15 +49,23 @@ var toJSON = function (cookie) {
 }
 
 var toLink = function (item) {
-	var thing = new XMLHttpRequest();
-	thing.open("GET", "https://api.stibarc.gq/gettitle.sjs?id=" + item, false);
-	thing.send(null);
-    var title = thing.responseText;
     try {
-        document.getElementById("posts").innerHTML = document.getElementById("posts").innerHTML.concat('<li><a href="post.html?id=').concat(item).concat('">').concat(title).concat("</a></li>");
+        var i = item.indexOf(':');
+        var splits = [item.slice(0, i), item.slice(i + 1)];
+        document.getElementById("posts").innerHTML = document.getElementById("posts").innerHTML.concat('<li><a href="post.html?id=').concat(splits[0]).concat('">').concat(splits[1]).concat("</a></li>");
     } catch (err) {
         console.log("Whoops");
     }
+}
+
+var getPosts = function(id) {
+	var tmp = new XMLHttpRequest();
+	tmp.open("GET", "https://api.stibarc.gq/getuserposts.sjs?id="+id, false);
+	tmp.send(null);
+	tmp = tmp.responseText.split("\n");
+	for (i = 0; i < tmp.length - 1; i++) {
+		toLink(tmp[i]);
+	}
 }
 
 var getStuff = function (id) {
@@ -70,7 +78,6 @@ var getStuff = function (id) {
 	var rank = tmp[4].split(":")[1];
 	var name = tmp[0].split(":")[1];
 	var email = tmp[1].split(":")[1];
-	var posts = tmp[2].split(":")[1];
 	var birthday = tmp[3].split(":")[1];
 	document.getElementById("username").innerHTML = "Username: ".concat(id);
 	document.getElementById("rank").innerHTML = "Rank: ".concat(rank);
@@ -81,11 +88,8 @@ var getStuff = function (id) {
 		document.getElementById("email").innerHTML = "Email: ".concat(email);
 	}
 	document.getElementById("bday").innerHTML = "Birthday: ".concat(birthday);
-	posts = posts.split(",");
 	document.getElementById("posts").innerHTML = "";
-	for (i = 0; i < posts.length; i++) {
-        toLink(posts[i]);
-    }
+	getPosts(id);
     } catch(err) {
 	senderr(err);
     }
