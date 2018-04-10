@@ -14,8 +14,8 @@ var login = function () {
         var xmlHttp = new XMLHttpRequest();
 	//var appid = window.localStorage.getItem("appID");
 	//if (appid == "" || appid == null || appid == undefined) appid = "none";
-        xmlHttp.open("GET", "https://api.stibarc.gq/createsess.sjs?username=" + username + "&password=" + password, false);
-        xmlHttp.send(null);
+        xmlHttp.open("POST", "https://api.stibarc.gq/createsess.sjs", false);
+        xmlHttp.send("username=" + username + "&password=" + password);
         sess = xmlHttp.responseText;
         if (sess != "Invalid username or password\n") {
             //document.cookie = "sess=" + sess;
