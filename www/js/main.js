@@ -78,11 +78,17 @@ var getUsername = function() {
 	window.localStorage.setItem("username", xmlHttp.responseText.split("\n")[0]);
 }
 
-/*var checkSess = function() {
+var checkSess = function() {
 	var sess = window.localStorage.getItem("sess");
-	var xmlHttp = new XMLHttpRequest().open("GET", "https://api.stibarc.gq/checksess.sjs?sess="+sess).send(null);
-	if (xmlHttp.responseText.split("\n")[0] == "bad") {window.localStorage.removeItem("sess");window.localStorage.removeItem("username");location.reload();}
-}*/
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("GET", "https://api.stibarc.gq/checksess.sjs?sess="+sess)
+	xmlHttp.send(null);
+	if (xmlHttp.responseText.split("\n")[0] == "bad") {
+		window.localStorage.removeItem("sess");
+		window.localStorage.removeItem("username");
+		location.reload();
+	}
+}
 
 window.onload = function () {
     try {
@@ -90,10 +96,8 @@ window.onload = function () {
     //var cookie = toJSON(document.cookie);
     var sess = window.localStorage.getItem("sess");
     if (sess != undefined && sess != null && sess != "") {
-	//checkSess();
-	var xmlHttp = new XMLHttpRequest().open("GET", "https://api.stibarc.gq/checksess.sjs?sess="+sess).send(null);
-	if (xmlHttp.responseText.split("\n")[0] == "bad") {window.localStorage.removeItem("sess");window.localStorage.removeItem("username");location.reload();}
-        document.getElementById("loggedout").style.display = "none";
+	checkSess();
+	document.getElementById("loggedout").style.display = "none";
         document.getElementById("loggedin").style.display = "";
         document.getElementById("footerout").style.display = "none";
         document.getElementById("footerin").style.display = "";
