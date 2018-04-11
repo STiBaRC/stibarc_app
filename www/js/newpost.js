@@ -98,12 +98,16 @@ var readFile = function(evt) {
 		var r = new FileReader();
 		r.onload = function(e) {
 			var contents = e.target.result;
-			var xmlHttp = new XMLHttpRequest();
-			xmlHttp.open("POST", "https://api.stibarc.gq/imageupload.sjs", false);
-			xmlHttp.send("content=" + encodeURIComponent(contents));
-			attachedfile = xmlHttp.responseText;
-			document.getElementById("imageadd").style.display = 'none';
-			document.getElementById("imageadded").style.display = '';
+			try {
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("POST", "https://api.stibarc.gq/imageupload.sjs", false);
+				xmlHttp.send("content=" + encodeURIComponent(contents));
+				attachedfile = xmlHttp.responseText;
+				document.getElementById("imageadd").style.display = 'none';
+				document.getElementById("imageadded").style.display = '';
+			} catch(err) {
+				
+			}
 		}
 		r.readAsDataURL(f);
 	}
