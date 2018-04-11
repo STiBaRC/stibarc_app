@@ -92,7 +92,7 @@ var post = function () {
     }
 }
 
-var readFile = function(evt) {
+/*var readFile = function(evt) {
 	var f = evt.target.files[0];
 	if(f) {
 		var r = new FileReader();
@@ -108,6 +108,44 @@ var readFile = function(evt) {
 			} catch(err) {
 				
 			}
+		}
+		r.readAsDataURL(f);
+	}
+}*/
+
+var uploadPart = function(file,part) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
+	xmlHttp.send("cont=true&file="+file+"&content=" + encodeURIComponent(part));
+}
+
+var readFile = function(evt) {
+	var f = evt.target.files[0];
+	if(f) {
+		var r = new FileReader();
+		r.onload = function(e) {
+			var contents = e.target.result;
+			console.log(contents.length);
+			if (contents.length <= 98000) {
+				console.log("Good");
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
+				xmlHttp.send("content=" + encodeURIComponent(contents));
+				attachedfile = xmlHttp.responseText;
+			} else {
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
+				var stuff = contents.match(/.{1,98000}/g);
+				console.log(stuff);
+				xmlHttp.send("content=" + encodeURIComponent(stuff[0]));
+				var file = xmlHttp.responseText.split("\n")[0];
+				for (var i = 1; i < stuff.length; i++) {
+					uploadPart(file,stuff[i]);
+				}
+				attachedfile = file;
+			}
+			document.getElementById("imageadd").style.display = 'none';
+			document.getElementById("imageadded").style.display = '';
 		}
 		r.readAsDataURL(f);
 	}
