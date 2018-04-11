@@ -100,6 +100,15 @@ var postcomment = function (id) {
 	}
 }
 
+var getAttach = function(id) {
+	document.getElementById("viewattachment").style.display = "none";
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("GET", "https://api.stibarc.gq/getimage.sjs?id="+id, false);
+	xmlHttp.send(null);
+	document.getElementById("image").src = xmlHttp.responseText;
+	document.getElementById("image").style.display = "";
+}
+
 window.onload = function () {
     try {
     pushed = false;
@@ -142,6 +151,9 @@ window.onload = function () {
     }
     document.getElementById("editlink").onclick = function (evt) {
 	document.location.href = "editpost.html?id=" + id;
+    }
+    document.getElementById("viewattachment").onclick = function (evt) {
+        getAttach(stuff["attachment"]);
     }
     } catch(err) {
 	senderr(err);
