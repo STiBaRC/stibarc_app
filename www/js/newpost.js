@@ -1,3 +1,5 @@
+var attachedfile = "none";
+
 var senderr = function(err) {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open("post", "https://api.stibarc.gq/senderror.sjs");
@@ -74,7 +76,7 @@ var post = function () {
 			window.localStorage.setItem("canpostagain", n);
 			var thing = new XMLHttpRequest();
 			thing.open("POST", "https://api.stibarc.gq/postpost.sjs", false);
-			thing.send("sess="+sess+"&title="+encodeURIComponent(title)+"&content="+encodeURIComponent(content).replace(/%0A/g, "%0D%0A"));
+			thing.send("sess="+sess+"&title="+encodeURIComponent(title)+"&image="+attachedfile+"&content="+encodeURIComponent(content).replace(/%0A/g, "%0D%0A"));
 			location.href = "post.html?id=" + thing.responseText;
 			document.getElementById("content").value = "";
 			document.getElementById("title").value = "";
@@ -90,7 +92,30 @@ var post = function () {
     }
 }
 
+var readFile = function(evt) {
+	var f = evt.target.files[0];
+	if(f) {
+		var r = new FileReader();
+		r.onload = function(e) {
+			var contents = e.target.result;
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.open("POST", "https://api.stibarc.gq/imageupload.sjs", false);
+			xmlHttp.send("content=" + encodeURIComponent(contents));
+			attachedfile = xmlHttp.responseText;
+			document.getElementById("imageadd").style.display = 'none';
+			document.getElementById("imageadded").style.display = '';
+		}
+		r.readAsDataURL(f);
+	}
+}
+
 window.onload = function () {
+    document.getElementById("file").addEventListener('change',readFile,false);
+    document.getElementById("removeimage").onclick = function (evt) {
+        attachedfile = "none";
+	document.getElementById("imageadded").style.display = 'none';
+	document.getElementById("imageadd").style.display = '';
+    }
     document.getElementById("send").onclick = function (evt) {
         post();
     }
