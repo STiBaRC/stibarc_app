@@ -134,6 +134,9 @@ window.onload = function () {
     if (stuff.poster == window.localStorage.getItem("username") && getRank() != "User") {
         document.getElementById("editlink").style.display = "";
     }
+    if (stuff["attachment"] != "none" && stuff["attachment"] != undefined && stuff["attachment"] != null) {
+        document.getElementById("attachment").style.display = "";
+    }
     xmlHttp.open("GET", "https://api.stibarc.gq/getcomments.sjs?id=" + id, false);
     xmlHttp.send(null);
     if (xmlHttp.responseText != "undefined\n") {
