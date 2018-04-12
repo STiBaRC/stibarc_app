@@ -8,6 +8,10 @@
     word-wrap: break-word;
 }
 
+#image {
+    width: 50%;
+}
+
 body {
     touch-action: manipulation;
     background-color: #98DFF3;
