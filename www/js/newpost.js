@@ -70,7 +70,7 @@ var post = function () {
 	var sess = window.localStorage.getItem("sess");
 	var again = window.localStorage.getItem("canpostagain");
 	if (again == null || again == "" || again == undefined) again = 0;
-    if (content != "" && content != undefined && title != "" && title != undefined) {
+    if (content.trim() != "" && content != undefined && title.trim() != "" && title != undefined) {
 		if (new Date().getTime() >= again) {
 			var n = new Date().getTime() + 15000;
 			window.localStorage.setItem("canpostagain", n);
