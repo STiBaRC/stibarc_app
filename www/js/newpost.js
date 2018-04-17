@@ -141,6 +141,7 @@ var readFile = function(evt) {
 		var r = new FileReader();
 		r.onload = function(e) {
 			var contents = e.target.result;
+			document.getElementById("imageprogress").style.display = '';
 			if (contents.length <= 98000) {
 				console.log("Good");
 				var xmlHttp = new XMLHttpRequest();
