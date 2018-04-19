@@ -134,8 +134,10 @@ var renderBar = function(x) {
 }
 
 var readFile = function(evt) {
+	document.getElementById("send").disabled = true;
 	document.getElementById("imageadd").style.display = 'none';
 	document.getElementById("pleasewait").style.display = '';
+	document.getElementById("error").style.display = "none";
 	var f = evt.target.files[0];
 	if(f) {
 		var r = new FileReader();
@@ -150,25 +152,59 @@ var readFile = function(evt) {
 				renderBar((25/25));
 				attachedfile = xmlHttp.responseText;
 			} else {
+				var bad = false;
 				var xmlHttp = new XMLHttpRequest();
 				xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
 				var stuff = contents.match(/.{1,98000}/g);
 				var totalParts = stuff.length;
 				xmlHttp.send("content=" + encodeURIComponent(stuff[0]));
 				var file = xmlHttp.responseText.split("\n")[0];
-				renderBar((1/totalParts));
-				for (var i = 1; i < stuff.length; i++) {
-					uploadPart(file,stuff[i]);
-					renderBar(((i+1)/totalParts));
+				if (xmlHttp.responseText.split("\n")[0] != "ERR" && xmlHttp.responseText.split("\n")[0] != "") {
+					bad = false;
+				} else {
+					var xmlHttp = new XMLHttpRequest();
+					xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
+					xmlHttp.send("content=" + encodeURIComponent(stuff[0]));
+					var file = xmlHttp.responseText.split("\n")[0];
+					if (xmlHttp.responseText.split("\n")[0] == "GOOD") {
+						bad = false;
+					} else {
+						bad = true;
+					}
 				}
-				attachedfile = file;
+				if (bad == false) {
+					renderBar((1/totalParts));
+					for (var i = 1; i < stuff.length; i++) {
+						if (bad == false) {
+							uploadPart(file,stuff[i],function(msg) {
+								if ((msg) == "Error") {
+									bad = true;
+								}
+							});
+							renderBar(((i+1)/totalParts));
+						}
+					}
+					if (bad == false) {
+						attachedfile = file;
+					} else {
+						document.getElementById("imageadd").style.display = "";
+						document.getElementById("error").style.display = "";
+					}
+				} else {
+					document.getElementById("imageadd").style.display = "";
+					document.getElementById("error").style.display = "";
+				}
 			}
-			document.getElementById("imageadd").style.display = 'none';
-			document.getElementById("imageprogress").style.display = 'none';
-			document.getElementById("imageadded").style.display = '';
+			if (bad == false) {
+				document.getElementById("pleasewait").style.display = 'none';
+				document.getElementById("imageprogress").style.display = 'none';
+				document.getElementById("imageadded").style.display = '';
+			}
 		}
 		r.readAsDataURL(f);
+		//r.readAsArrayBuffer(f);
 	}
+	document.getElementById("send").disabled = false;
 }
 
 window.onload = function () {
