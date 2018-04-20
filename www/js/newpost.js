@@ -149,14 +149,14 @@ var readFile = function(evt) {
 				var xmlHttp = new XMLHttpRequest();
 				xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
 				xmlHttp.send("content=" + encodeURIComponent(contents));
-				renderBar((25/25));
+				//renderBar((25/25));
 				attachedfile = xmlHttp.responseText;
 			} else {
 				var bad = false;
 				var xmlHttp = new XMLHttpRequest();
 				xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
 				var stuff = contents.match(/.{1,98000}/g);
-				var totalParts = stuff.length;
+				//var totalParts = stuff.length;
 				xmlHttp.send("content=" + encodeURIComponent(stuff[0]));
 				var file = xmlHttp.responseText.split("\n")[0];
 				if (xmlHttp.responseText.split("\n")[0] != "ERR" && xmlHttp.responseText.split("\n")[0] != "") {
@@ -173,7 +173,7 @@ var readFile = function(evt) {
 					}
 				}
 				if (bad == false) {
-					renderBar((1/totalParts));
+					//renderBar((1/totalParts));
 					for (var i = 1; i < stuff.length; i++) {
 						if (bad == false) {
 							uploadPart(file,stuff[i],function(msg) {
@@ -181,7 +181,7 @@ var readFile = function(evt) {
 									bad = true;
 								}
 							});
-							renderBar(((i+1)/totalParts));
+							//renderBar(((i+1)/totalParts));
 						}
 					}
 					if (bad == false) {
