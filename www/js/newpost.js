@@ -208,13 +208,17 @@ var readFile = function(evt) {
 }
 
 window.onload = function () {
-    document.getElementById("file").addEventListener('change',readFile,false);
-    document.getElementById("removeimage").onclick = function (evt) {
-        attachedfile = "none";
-	document.getElementById("imageadded").style.display = 'none';
-	document.getElementById("imageadd").style.display = '';
-    }
-    document.getElementById("send").onclick = function (evt) {
-        post();
+    try {
+        document.getElementById("file").addEventListener('change',readFile,false);
+        document.getElementById("removeimage").onclick = function (evt) {
+            attachedfile = "none";
+    	    document.getElementById("imageadded").style.display = 'none';
+	    document.getElementById("imageadd").style.display = '';
+        }
+        document.getElementById("send").onclick = function (evt) {
+            post();
+        }
+    } catch(err) {
+	senderr(err);
     }
 }
