@@ -113,10 +113,30 @@ var post = function () {
 	}
 }*/
 
-var uploadPart = function(file,part) {
+var uploadPart = function(file,part,callback) {
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
 	xmlHttp.send("cont=true&file="+file+"&content=" + encodeURIComponent(part));
+	try {
+		if (xmlHttp.responseText.split("\n")[0] == "GOOD") {
+			callback("Good");
+		} else {
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
+			xmlHttp.send("cont=true&file="+file+"&content=" + encodeURIComponent(part));
+			try {
+				if (xmlHttp.responseText.split("\n")[0] == "GOOD") {
+					callback("Good");
+				} else {
+					callback("Error");
+				}
+			} catch(err) {
+				callback("Error");
+			}
+		}
+	} catch(err) {
+		callback("Error");
+	}
 }
 
 var renderBar = function(x) {
