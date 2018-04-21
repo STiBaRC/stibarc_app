@@ -52,7 +52,7 @@ var toLink = function (item) {
     try {
         var i = item.indexOf(':');
         var splits = [item.slice(0, i), item.slice(i + 1)];
-        document.getElementById("posts").innerHTML = document.getElementById("posts").innerHTML.concat('<li><a href="post.html?id=').concat(splits[0]).concat('">').concat(splits[1]).concat("</a></li>");
+        document.getElementById("posts").innerHTML = document.getElementById("posts").innerHTML.concat('<li><a href="post.html?id=').concat(splits[0]).concat('">').concat(splits[1].replace(/</g, "&lt;").replace(/>/g, "&gt;")).concat("</a></li>");
     } catch (err) {
         console.log("Whoops");
     }
@@ -73,7 +73,7 @@ var getStuff = function (id) {
 	var thing = new XMLHttpRequest();
 	thing.open("GET", "https://api.stibarc.gq/getuser.sjs?id=" + id, false);
 	thing.send(null);
-    var stuff = thing.responseText;
+    var stuff = thing.responseText.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 	var tmp = stuff.split("\n");
 	var rank = tmp[4].split(":")[1];
 	var name = tmp[0].split(":")[1];
