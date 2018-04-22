@@ -113,30 +113,10 @@ var post = function () {
 	}
 }*/
 
-var uploadPart = function(file,part,callback) {
+var uploadPart = function(file,part) {
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
 	xmlHttp.send("cont=true&file="+file+"&content=" + encodeURIComponent(part));
-	try {
-		if (xmlHttp.responseText.split("\n")[0] == "GOOD") {
-			callback("Good");
-		} else {
-			var xmlHttp = new XMLHttpRequest();
-			xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
-			xmlHttp.send("cont=true&file="+file+"&content=" + encodeURIComponent(part));
-			try {
-				if (xmlHttp.responseText.split("\n")[0] == "GOOD") {
-					callback("Good");
-				} else {
-					callback("Error");
-				}
-			} catch(err) {
-				callback("Error");
-			}
-		}
-	} catch(err) {
-		callback("Error");
-	}
 }
 
 var renderBar = function(x) {
@@ -172,59 +152,27 @@ var readFile = function(evt) {
 				//renderBar((25/25));
 				attachedfile = xmlHttp.responseText;
 			} else {
-				var bad = false;
 				var xmlHttp = new XMLHttpRequest();
 				xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
 				var stuff = contents.match(/.{1,98000}/g);
-				//var totalParts = stuff.length;
+				var totalParts = stuff.length;
 				xmlHttp.send("content=" + encodeURIComponent(stuff[0]));
 				var file = xmlHttp.responseText.split("\n")[0];
-				if (xmlHttp.responseText.split("\n")[0] != "ERR" && xmlHttp.responseText.split("\n")[0] != "") {
-					bad = false;
-				} else {
-					var xmlHttp = new XMLHttpRequest();
-					xmlHttp.open("POST", "https://api.stibarc.gq/uploadparts.sjs", false);
-					xmlHttp.send("content=" + encodeURIComponent(stuff[0]));
-					var file = xmlHttp.responseText.split("\n")[0];
-					if (xmlHttp.responseText.split("\n")[0] == "GOOD") {
-						bad = false;
-					} else {
-						bad = true;
-					}
+				//renderBar((1/totalParts));
+				for (var i = 1; i < stuff.length; i++) {
+					uploadPart(file,stuff[i]);
+					//renderBar(((i+1)/totalParts));
 				}
-				if (bad == false) {
-					//renderBar((1/totalParts));
-					for (var i = 1; i < stuff.length; i++) {
-						if (bad == false) {
-							uploadPart(file,stuff[i],function(msg) {
-								if ((msg) == "Error") {
-									bad = true;
-								}
-							});
-							//renderBar(((i+1)/totalParts));
-						}
-					}
-					if (bad == false) {
-						attachedfile = file;
-					} else {
-						document.getElementById("imageadd").style.display = "";
-						document.getElementById("error").style.display = "";
-					}
-				} else {
-					document.getElementById("imageadd").style.display = "";
-					document.getElementById("error").style.display = "";
-				}
+				attachedfile = file;
 			}
-			if (bad == false) {
-				document.getElementById("pleasewait").style.display = 'none';
-				document.getElementById("imageprogress").style.display = 'none';
-				document.getElementById("imageadded").style.display = '';
-			}
+			document.getElementById("pleasewait").style.display = 'none';
+			document.getElementById("imageadd").style.display = 'none';
+			document.getElementById("imageprogress").style.display = 'none';
+			document.getElementById("imageadded").style.display = '';
+			document.getElementById("send").disabled = false;
 		}
 		r.readAsDataURL(f);
-		//r.readAsArrayBuffer(f);
 	}
-	document.getElementById("send").disabled = false;
 }
 
 window.onload = function () {
