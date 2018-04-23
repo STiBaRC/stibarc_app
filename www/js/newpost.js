@@ -137,13 +137,12 @@ var readFile = function(evt) {
 	document.getElementById("send").disabled = true;
 	document.getElementById("imageadd").style.display = 'none';
 	document.getElementById("pleasewait").style.display = '';
-	document.getElementById("error").style.display = "none";
 	var f = evt.target.files[0];
 	if(f) {
 		var r = new FileReader();
 		r.onload = function(e) {
 			var contents = e.target.result;
-			document.getElementById("imageprogress").style.display = '';
+			//document.getElementById("imageprogress").style.display = '';
 			if (contents.length <= 98000) {
 				console.log("Good");
 				var xmlHttp = new XMLHttpRequest();
@@ -165,9 +164,9 @@ var readFile = function(evt) {
 				}
 				attachedfile = file;
 			}
-			document.getElementById("pleasewait").style.display = 'none';
 			document.getElementById("imageadd").style.display = 'none';
-			document.getElementById("imageprogress").style.display = 'none';
+			//document.getElementById("imageprogress").style.display = 'none';
+			document.getElementById("pleasewait").style.display = 'none';
 			document.getElementById("imageadded").style.display = '';
 			document.getElementById("send").disabled = false;
 		}
@@ -176,17 +175,13 @@ var readFile = function(evt) {
 }
 
 window.onload = function () {
-    try {
-        document.getElementById("file").addEventListener('change',readFile,false);
-        document.getElementById("removeimage").onclick = function (evt) {
-            attachedfile = "none";
-    	    document.getElementById("imageadded").style.display = 'none';
-	    document.getElementById("imageadd").style.display = '';
-        }
-        document.getElementById("send").onclick = function (evt) {
-            post();
-        }
-    } catch(err) {
-	senderr(err);
+    document.getElementById("file").addEventListener('change',readFile,false);
+    document.getElementById("removeimage").onclick = function (evt) {
+        attachedfile = "none";
+	document.getElementById("imageadded").style.display = 'none';
+	document.getElementById("imageadd").style.display = '';
+    }
+    document.getElementById("send").onclick = function (evt) {
+        post();
     }
 }
