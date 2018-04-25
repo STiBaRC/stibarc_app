@@ -3,6 +3,10 @@
     word-wrap: break-word;
 }
 
+#content {
+    white-space:pre-wrap;
+}
+
 #comment {
     background-color: #98DFF3;
     word-wrap: break-word;
