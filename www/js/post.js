@@ -109,6 +109,16 @@ var getAttach = function(id) {
 	document.getElementById("image").style.display = "";
 }
 
+var checkVerified = function(poster) {
+	var thing = new XMLHttpRequest();
+	thing.open("GET", "https://api.stibarc.gq/checkverify.sjs?id=" + poster, false);
+	thing.send(null);
+	var stuff = thing.responseText.split("\n")[0];
+	if (stuff == "true") {
+		document.getElementById("verified").style.display = "";
+	}
+}
+
 window.onload = function () {
     try {
     pushed = false;
@@ -126,7 +136,8 @@ window.onload = function () {
     var stuff = JSON.parse(xmlHttp.responseText);
     document.getElementById("title").innerHTML = stuff.title.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     document.title = stuff.title + " - STiBaRC";
-    document.getElementById("dateandstuff").innerHTML = 'Posted by <a href="user.html?id=' + stuff.poster + '">' + stuff.poster + "</a> at " + stuff.postdate;
+    document.getElementById("dateandstuff").innerHTML = 'Posted by <a href="user.html?id=' + stuff.poster + '">' + stuff.poster + '</a><span id="verified" title="Verified user" style="display:none">'+"✔️</span> at " + stuff.postdate;
+    checkVerified(stuff.poster);
     document.getElementById("content").innerHTML = stuff.content.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\r\n/g, "<br/>");
     if (stuff['edited'] == true) {
         document.getElementById("edited").style.display = "";
