@@ -79,7 +79,7 @@ var getStuff = function (id) {
 	var name = tmp[0].split(":")[1];
 	var email = tmp[1].split(":")[1];
 	var birthday = tmp[3].split(":")[1];
-	document.getElementById("username").innerHTML = "Username: ".concat(id);
+	document.getElementById("username").innerHTML = "Username: ".concat(id).concat('<span id="verified" title="Verified user" style="display:none">✔️</span>');
 	document.getElementById("rank").innerHTML = "Rank: ".concat(rank);
 	document.getElementById("name").innerHTML = "Real name: ".concat(name);
 	if (email != "Not shown" && email != "Not set") {
@@ -95,12 +95,23 @@ var getStuff = function (id) {
     }
 }
 
+var checkVerified = function(poster) {
+	var thing = new XMLHttpRequest();
+	thing.open("GET", "https://api.stibarc.gq/checkverify.sjs?id=" + poster, false);
+	thing.send(null);
+	var stuff = thing.responseText.split("\n")[0];
+	if (stuff == "true") {
+		document.getElementById("verified").style.display = "";
+	}
+}
+
 window.onload = function () {
 	try {
 	var id = getAllUrlParams().id;
 	//var cookie = toJSON(document.cookie);
 	var sess = window.localStorage.getItem("sess");
 	getStuff(id);
+	checkVerified(id);
     if (sess != undefined && sess != "" && sess != null) {
         document.getElementById("footerout").style.display = "none";
         document.getElementById("footerin").style.display = "";
