@@ -5,6 +5,7 @@
 		The official STiBaRC mobile app.
 	</description>
 	<icon src="icon.jpg" />
+	<splash src="splash.png" />
 	<author email="herronjo110@gmail.com" href="https://stibarc.gq">
 		STiBaRC Team
 	</author>
