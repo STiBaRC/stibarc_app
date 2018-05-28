@@ -102,11 +102,21 @@ var postcomment = function (id) {
 
 var getAttach = function(id) {
 	document.getElementById("viewattachment").style.display = "none";
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("GET", "https://api.stibarc.gq/getimage.sjs?id="+id, false);
-	xmlHttp.send(null);
-	document.getElementById("image").src = xmlHttp.responseText;
-	document.getElementById("image").style.display = "";
+	if (window.localStorage.getItem("cache"+id) == null || window.localStorage.getItem("cache"+id) == undefined) {
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open("GET", "https://api.stibarc.gq/getimage.sjs?id="+id, false);
+		xmlHttp.send();
+		document.getElementById("image").src = xmlHttp.responseText;
+		document.getElementById("image").style.display = "";
+		var tmp = xmlHttp.responseText.split("");
+		tmp = tmp[0]+tmp[1]+tmp[2]+tmp[3]+tmp[4];
+		if (tmp == "data:") {
+			window.localStorage.setItem("cache"+id, xmlHttp.responseText);
+		}
+	} else {
+		document.getElementById("image").src = window.localStorage.getItem("cache"+id);
+		document.getElementById("image").style.display = "";
+	}
 }
 
 var checkVerified = function(poster) {
