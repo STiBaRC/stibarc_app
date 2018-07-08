@@ -42,18 +42,6 @@ var toJSON = function (cookie) {
 	return output;
 }
 
-/*var toLink = function (item) {
-	var thing = new XMLHttpRequest();
-	thing.open("GET", "https://api.stibarc.gq/gettitle.sjs?id=" + item, false);
-	thing.send(null);
-	var title = thing.responseText;
-	try {
-		document.getElementById("posts").innerHTML = document.getElementById("posts").innerHTML.concat('<li><a href="post.html?id=').concat(item).concat('">').concat(title).concat("</a></li>");
-	} catch (err) {
-		console.log("Whoops");
-	}
-}*/
-
 var toLink = function (item) {
 	try {
 		var i = item.indexOf(':');
