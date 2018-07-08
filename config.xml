@@ -20,4 +20,5 @@
 	<plugin name="de.appplant.cordova.plugin.local-notification" source="npm" />
 	<plugin name="cordova-plugin-background-mode" source="npm" />
 	<gap:plugin name="phonegap-plugin-push" source="npm" />
+	<preference name="phonegap-version" value="cli-8.0.0" />
 </widget>
