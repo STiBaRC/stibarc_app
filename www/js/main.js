@@ -100,7 +100,6 @@ window.onload = function () {
 		document.getElementById("loggedin").style.display = "";
 		document.getElementById("footerout").style.display = "none";
 		document.getElementById("footerin").style.display = "";
-		document.getElementById("edit").href = "editprofile.sjs?sess=" + sess;
 	}
 	document.getElementById("loadmore").onclick = function(evt) {
 		loadMore();
