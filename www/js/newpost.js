@@ -1,11 +1,5 @@
 var attachedfile = "none";
 
-var senderr = function(err) {
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("post", "https://api.stibarc.gq/senderror.sjs");
-  xmlHttp.send("error="+err);
-}
-
 function getAllUrlParams(url) {
     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
     var obj = {};
@@ -62,7 +56,6 @@ var toJSON = function (cookie) {
 }
 
 var post = function () {
-    try {
     var content = document.getElementById("content").value;
 	var title = document.getElementById("title").value;
 	//var cookie = toJSON(document.cookie);
@@ -86,9 +79,6 @@ var post = function () {
 			document.getElementById("wait").innerHTML = "Please wait " + left + " more seconds before posting again";
 			document.getElementById("wait").style.display = "";
 		}
-    }
-    } catch(err) {
-	senderr(err);
     }
 }
 
