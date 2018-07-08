@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>STiBaRC</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
-	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
-	<meta http-equiv="X-XSS-Protection" content="0">
-    <link href="css/newpost.css" rel="stylesheet" />
-    <script src="js/newpost.js"></script>
+<meta charset="utf-8" />
+<title>STiBaRC</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+<meta http-equiv="X-XSS-Protection" content="0">
+<link rel="icon" type="image/png" href="icon.png">
+<link href="css/newpost.css" rel="stylesheet" />
+<script src="js/newpost.js"></script>
 </head>
 <body>
-	<div id="wait" style="display: none">Please wait x more seconds before posting again<br/><br/></div>
-    Title: <input type="text" id="title"><br/>
-	Content: <textarea name="content" id="content" rows="20" cols="70"></textarea><br/>
-	<div id="imageadd">Attach image: <input type="file" id="file" name="file" accept="image/*" /></div>
-	<div id="pleasewait" style="display:none">Please wait for image to upload...</div>
-	<div id="imageprogress" style="display:none">[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</div>
-	<div id="imageadded" style="display:none">Image added <button id="removeimage">remove</button></div><br/>
-	<button id="send">Submit</button>
+<div id="wait" style="display: none">Please wait x more seconds before posting again<br/><br/></div>
+Title: <input type="text" id="title"><br/>
+Content: <textarea name="content" id="content" rows="20" cols="70"></textarea><br/><br/>
+<div id="error" style="display:none">Error uploading image!</div>
+<div id="imageadd">Attach image: <input type="file" id="file" name="file" accept="image/*" /></div>
+<div id="pleasewait" style="display:none">Please wait for image to upload...</div>
+<progress id="imageprogress" style="display:none"></progress>
+<div id="imageadded" style="display:none">Image added <button id="removeimage">remove</button></div><br/>
+<button id="send">Submit</button>
 </body>
 </html>
