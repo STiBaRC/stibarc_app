@@ -38,7 +38,7 @@ var toLink = function (item) {
 		var i = item.indexOf(':');
 		var splits = [item.slice(0, i), item.slice(i + 1)];
 		document.getElementById("shitlist").innerHTML = document.getElementById("shitlist").innerHTML.concat('<li><a href="post.html?id=').concat(splits[0]).concat('">').concat(splits[1].replace(/</g, "&lt;").replace(/>/g, "&gt;")).concat("</a></li>");
-
+		lastid = splits[0];
 	} catch (err) {
 		console.log("Whoops");
 	}
@@ -73,12 +73,11 @@ var getUsername = function() {
 	window.localStorage.setItem("username", xmlHttp.responseText.split("\n")[0]);
 }
 
-var page = 1;
+var lastid = 1;
 
 var loadMore = function() {
-	page++;
 	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("GET", "https://api.stibarc.gq/getposts.sjs?page="+page, false);
+	xmlHttp.open("GET", "https://api.stibarc.gq/getposts.sjs?id="+lastid, false);
 	xmlHttp.send(null);
 	if (xmlHttp.responseText.trim() != "") {
 		var tmp = xmlHttp.responseText.split("\n");
