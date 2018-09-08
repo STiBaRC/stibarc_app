@@ -1,7 +1,12 @@
 body {
-	background-color: #98DFF3;
-	word-wrap: break-word;
-	text-align: center;
+    background-color: #98DFF3;
+    word-wrap: break-word;
+    text-align: center;
+}
+#mainshit {
+    border-radius: 15px; 
+    padding: 15px; 
+    background-color: white;
 }
 a:link {
     color: #000000;

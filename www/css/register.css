@@ -1,17 +1,17 @@
 body {
-	background-color: #98DFF3;
+	text-align: left;
+}
+
+#privacies {
+	background-color: white;
+	padding: 15px;
+	border-radius: 15px;
 	word-wrap: break-word;
-	text-align: center;
 }
-a:link {
-    color: #000000;
-}
-a:visited {
-    color: #000000;
-}
-a:hover {
-    color: #000000;
-}
-a:active {
-    color: #000000;
+
+#mainshit {
+    background-color: #FFFFFF;
+    word-wrap: break-word;
+    padding: 15px;
+    border-radius: 15px;
 }

@@ -4,34 +4,58 @@
 <meta charset="utf-8" />
 <title>STiBaRC</title>
 <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
-<meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; 'unsafe-eval'; script-src *  'unsafe-inline';'unsafe-eval'; media-src *">
-<meta http-equiv="X-XSS-Protection" content="0">
+<link rel="stylesheet" href="css/global.css">
 <link href="css/default.css" rel="stylesheet">
 <link rel="icon" type="image/png" href="icon.png">
+<script src="js/global.js"></script>
 <script src="js/notifs.js"></script>
 <script src="js/main.js"></script>
 </head>
 <body>
+<iframe height="0" width="0" src="https://api.stibarc.gq/justkeepingscore.sjs" style="visibility:hidden;display:none"></iframe>
+<noscript>
+Please visit the <a href="http://legacy.stibarc.gq">legacy site</a> if JavaScript is disabled or not available.
+</noscript>
 <br/>
 <div id="header">
-<div id="loggedout">
-<a href="login.html">Login</a> - <a href="register.html">Register</a> - <a href="search.html">Search</a>
-</div>
-<div id="loggedin" style="display:none">
-<a href="newpost.html">New post</a> - <!--a href="" id="edit"--><s>Edit profile</s><!--/a--> - <a href="search.html">Search</a>
-</div>
+<span><img src="logo.png" id="logo"></span><br>
+<span id="loggedout">
+<span class="buttons">
+  <a href="login.html" class="button">Login</a>
+  <a href="register.html" class="button">Register</a>
+  <a href="search.html" class="button">Search</a></span>
+</span>
+<span id="loggedin" style="display: none;">
+<span class="buttons"><a href="newpost.html" class="button">New post</a> <a href="editprofile.html" id="edit" class="button">Edit profile</a> <a href="search.html" class="button">Search</a></span>
+</span>
 </div><br/>
 <div id="mainblobshitwithlist">
-Recent posts:
-<ul id="shitlist">
-<li>Loading...</li>
-</ul>
-<div style="display:none;text-align:center" id="loadmorecontainer"><a href="javascript:;" id="loadmore">&#x25BC;Load more&#x25BC;</a></div>
+  <h2>Recent posts:</h2>
+<div id="shitlist">
+<!--BEGIN CHAT-->
+<!--unknown: so i heard youve got the stuff im looking for?-->
+<!--herronjo: You'd be right.-->
+<!--unknown: oxycoton?-->
+<!--herronjo: Yep-->
+<!--unknown: herion?-->
+<!--herronjo: Best contraceptive-->
+<!--unknown: What?-->
+<!--herronjo: Nevermind-->
+<!--unknown: ...-->
+<!--unknwon: anyways, i need the stuff asap-->
+<!--herronjo: Got it, meet me at 608 W Central Ave, Delaware, OH 43015 at midnight-->
+<!--unknown: on it-->
+<!--herronjo: Don't forget the-->
+<!--CHAT ENDED BY unknown-->
+<!--https://stibarc.gq/post.html?id=170-->
+</div>
+<div id="loadmorecontainer" class="button"><a href="javascript:;" id="loadmore">Load more</a></div>
 </div>
 <br/>
 <footer>
-<div id="footerout"><a href="index.html">Home</a><br /></div>
-<div id="footerin" style="display:none"><a href="index.html">Home</a> - <a href="https://messenger.stibarc.gq">Messenger</a> - <a href="logout.html">Logout</a><br/></div>
+<div id="footerout"><a href="index.html" class="button">Home</a> <a href="privacy.html" class="button">Privacy</a><br/></div>
+<div id="footerin" style="display:none"><a href="index.html" class="button">Home</a> <a href="mailto:herronjo110@gmail.com?subject=STiBaRC%20User%20Verification%20Request" class="button">Request user verification</a> <a href="logout.html" class="button">Logout</a> <a href="privacy.html" class="button">Privacy</a><br/></div>
+<br>
 Official president: Aldeenyo (Alden Savon)<br/>
 Notice: this is intended to be a clone of Reddit, made just for fun and as a tribute to my friend Andrew.<br/>
 Icon by Alex Savon<br/>
