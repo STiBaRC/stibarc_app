@@ -3,29 +3,6 @@
 <title>Register - STiBaRC</title>
 <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
 <link rel="icon" type="image/png" href="icon.png">
-<script type="text/javascript">
-
-if(("standalone" in window.navigator) && window.navigator.standalone){
-
-var noddy, remotes = false;
-
-document.addEventListener('click', function(event) {
-
-noddy = event.target;
-
-while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
-noddy = noddy.parentNode;
-}
-
-if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes))
-{
-event.preventDefault();
-document.location.href = noddy.href;
-}
-
-},false);
-}
-</script>
 <link rel="stylesheet" href="css/global.css">
 <link href="css/register.css" rel="stylesheet" />
 <script src="js/global.js"></script>
@@ -51,9 +28,6 @@ document.location.href = noddy.href;
 <button id="send">Register</button><br><br>
 <i>* indicating required field</i>
 </div>
-
-
-
 <br>
 <footer>
 <div id="footerout"><a href="index.html" class="button">Home</a> <a href="privacy.html" class="button">Privacy</a><br></div>
@@ -62,13 +36,6 @@ document.location.href = noddy.href;
 Official president: Aldeenyo (Alden Savon)<br>
 Notice: this is intended to be a clone of Reddit, made just for fun and as a tribute to my friend Andrew.<br>
 Icon by Alex Savon<br>
-© 2018 STiBaRC<br>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="P7AHE4MUXP2TA">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
+© 2018 STiBaRC<br>>
 </footer>
-
 </html>
