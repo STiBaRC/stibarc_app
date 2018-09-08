@@ -4,29 +4,6 @@
 <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 <link rel="icon" type="image/png" href="icon.png">
 <title>Login - STiBaRC</title>
-<script type="text/javascript">
-
-if(("standalone" in window.navigator) && window.navigator.standalone){
-
-var noddy, remotes = false;
-
-document.addEventListener('click', function(event) {
-
-noddy = event.target;
-
-while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
-noddy = noddy.parentNode;
-}
-
-if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes))
-{
-event.preventDefault();
-document.location.href = noddy.href;
-}
-
-},false);
-}
-</script>
 <link rel="stylesheet" href="css/global.css">
 <link href="css/login.css" rel="stylesheet">
 <script src="js/global.js"></script>
@@ -41,7 +18,7 @@ document.location.href = noddy.href;
 <button id="login">Login</button><br><br></div>
 <br>
 <footer>
-<div id="footerin" style=""><a href="index.html" class="button" style="font-weight: bold">Home</a>  <a href="privacy.html" class="button" style="font-weight: bold">Privacy</a><br></div>
+<div id="footerin" style=""><a href="index.html" class="button" style="font-weight: bold">Home</a>  <a href="https://stibarc.gq/privacy.html" class="button" style="font-weight: bold">Privacy</a><br></div>
 <br>
 Official president: Aldeenyo (Alden Savon)<br>
 Notice: this is intended to be a clone of Reddit, made just for fun and as a tribute to my friend Andrew.<br>
